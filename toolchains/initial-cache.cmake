@@ -19,6 +19,11 @@ set(LLVM_ENABLE_ASSERTIONS ON CACHE BOOL "")
 set(LLVM_ENABLE_EH         ON CACHE BOOL "")
 set(LLVM_ENABLE_RTTI       ON CACHE BOOL "")
 
+# Halide compresses embedded GPU kernels with llvm::compression::zlib. The
+# zlib that LLVM links against is built by CMakeLists.txt and shipped in the
+# wheel, so it does not depend on a host zlib.
+set(LLVM_ENABLE_ZLIB       FORCE_ON CACHE STRING "")
+
 ##############################################################################
 # Features we always want OFF
 #
@@ -37,7 +42,6 @@ set(LLVM_ENABLE_OCAMLDOC     OFF CACHE BOOL "")
 set(LLVM_ENABLE_PLUGINS      OFF CACHE BOOL "")
 set(LLVM_ENABLE_TERMINFO     OFF CACHE BOOL "")
 set(LLVM_ENABLE_WARNINGS     OFF CACHE BOOL "")
-set(LLVM_ENABLE_ZLIB         OFF CACHE BOOL "")
 set(LLVM_ENABLE_ZSTD         OFF CACHE BOOL "")
 
 set(LLVM_BUILD_UTILS         OFF CACHE BOOL "")
